@@ -18,15 +18,14 @@ public class ChessPosition{
     public int getRow() {
         return row;
     }
-    public Position toPosition(){
+    protected Position toPosition(){
         return new Position(8 - row, column - 'a');
     }
     protected static ChessPosition fromPosition(Position position){
-        return new ChessPosition((char)(1+position.getColumn()), (8-position.getRow()));
+        return new ChessPosition((char)('a' - position.getColumn()), (8-position.getRow()));
     }
     @Override
     public String toString(){
         return "" + column + row;
-
     }
 }

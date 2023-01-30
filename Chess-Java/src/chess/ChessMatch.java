@@ -5,6 +5,12 @@ import boardgame.Piece;
 import boardgame.Position;
 import chess.pieces.King;
 import chess.pieces.Rook;
+import chess.pieces.Pawn;
+import chess.pieces.Bishop;
+import chess.pieces.Queen;
+
+
+
 
 public class ChessMatch {
     private Board board;
@@ -26,8 +32,14 @@ public class ChessMatch {
         Position source = sourcePosition.toPosition();
         Position target = targetPosition.toPosition();
         validateSourcePosition(source);
+        validateTargetPosition(source, target);
         Piece capturedPiece = makeMove(source, target);
         return (ChessPiece)capturedPiece;
+    }
+    private void validateTargetPosition(Position source, Position target){
+        if(!board.piece(source).possibleMove(target)){
+            throw new ChessException("Impossible move to this piece");
+        }
     }
     private void validateSourcePosition(Position position){
         if(!board.thereIsAPiece(position)){
@@ -56,6 +68,12 @@ public class ChessMatch {
         placeNewPiece('h', 8, new Rook(board, Color.BLACK));
         placeNewPiece('a', 8, new Rook(board, Color.BLACK));
         placeNewPiece('e', 8, new King(board, Color.BLACK));
+
+        placeNewPiece('f', 1, new Bishop(board, Color.WHITE));
+        placeNewPiece('f', 2, new Pawn(board, Color.WHITE));
+        placeNewPiece('d', 2, new Pawn(board, Color.WHITE));
+        placeNewPiece('e', 2, new Pawn(board, Color.WHITE));
+        placeNewPiece('d', 1, new Queen(board, Color.WHITE));
     }
     
 }

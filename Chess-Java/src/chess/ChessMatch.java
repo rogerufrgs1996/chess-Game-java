@@ -106,6 +106,7 @@ public class ChessMatch {
             undoMove(source, target, capturedPiece);
             throw new ChessException("You cant put yoursel in check!");
         }
+
         if(testCheck(opponent(currentPlayer))){
             check = true;
         }
